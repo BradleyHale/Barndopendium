@@ -1,0 +1,17 @@
+{
+  "name": "my-electron-app",
+  "version": "1.0.0",
+  "description": "\"hello World!\"",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Bradley Hale",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^22.0.2"
+  },
+  "dependencies": {
+    "better-sqlite3": "^8.0.1"
+  }
+}
