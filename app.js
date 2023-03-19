@@ -7,10 +7,8 @@ const app = express();
 
 app.use(express.static("public", {index: "index.html", extensions: ["html"]}));
 
-app.use(express.json({limit: '200kb'}));
-
 // require validators
-const userValidator = require("./Validators/inputValidator");
+const planValidator = require("./Validators/planValidator");
 
 // require controller
 const planController = require("./Controllers/planController");
