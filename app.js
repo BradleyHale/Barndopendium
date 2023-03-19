@@ -25,14 +25,14 @@ const planController = require("./Controllers/planController");
 
  // GET - retrieve data from database
  app.get("/api/search/:searchOperation", (req,res) => {
-    planController.findMethod(req,res);
+    planController.searchByOp(req,res);
 
  })
 
  // POST - insert new plans into database
-app.post("/api/insert",
-   planValidator.validateRegisterBody,
-   planController.addPlan
-);
+// app.post("/api/insert",
+//    planValidator.validateRegisterBody,
+//    planController.addPlan
+// );
 
 app.listen(8080)

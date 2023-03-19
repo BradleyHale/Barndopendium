@@ -13,7 +13,6 @@ async function searchByOp(req,res) {
 
     if (operation === "searchBySQFT") {
         result = await planModel.searchBySQFT(upperSQFT,lowerSQFT);
-
     } else if (operation === "searchByWidth") {
         result = await planModel.searchByWidth(upper,lower);
     } else if (operation === "searchByLength") {
@@ -27,11 +26,12 @@ async function searchByOp(req,res) {
     } else if (operation === "searchByBaths") {
         result = await planModel.searchByBaths(Baths);
     } else {
+        res.send({operation});
         return res.sendStatus(404);
     }
 
     if(!result) {
-        return res.sendStatus(404);
+        return res.sendStatus(400);
     }
     res.sendStatus(201);
 }
