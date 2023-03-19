@@ -10,7 +10,7 @@ const validateOpts = {
 };
 
 const planSchema = joi.object({
-    input: joi.string()
+    input: joi.number()
     .integer()
 })
 
@@ -24,6 +24,6 @@ function validateInputBody(req, res, next) {
     next();
 }
 
-module.exports = {
+module.exports = (
     validateInputBody
-}
+)

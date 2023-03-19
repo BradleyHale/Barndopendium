@@ -1,3 +1,4 @@
+"use strict"
 const planModel = require("../Models/planModel");
 
 /*make all of this ONE method
@@ -88,9 +89,8 @@ async function searchByOp(req,res) {
     need to change it bc search operation is not apart of the request body
 */
 
-module.exports (
-    searchByOp,
-    addPlan
+module.exports = {
+    searchByOp
 
-)
+}
 

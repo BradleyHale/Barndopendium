@@ -86,7 +86,7 @@ function searchByBaths(baths) {
     });
 }
 
-module.exports (
+module.exports = {
     searchByLength,
     searchByWidth,
     searchBySidewallLength,
@@ -95,4 +95,4 @@ module.exports (
     searchByFloors,
     searchByBaths,
     addToDatabase
-)
+}
