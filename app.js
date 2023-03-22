@@ -1,7 +1,8 @@
 "use strict";
 require("dotenv").config;
 const path = require('path');
-// const { app, BrowserWindow } = require('electron');
+// const { app, BrowserWindow } = require('electron'); | will implement at the end
+// TODO LIST: parse req.query
 const express = require("express");
 const app = express();
 
@@ -13,7 +14,7 @@ const planValidator = require("./Validators/planValidator");
 // require controller
 const planController = require("./Controllers/planController");
 
-// endpoints
+// endpoints ------------------------------------
 
 
 // index GET:

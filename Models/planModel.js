@@ -5,7 +5,7 @@ const db = require("./db");
 */
 
 function searchByLength(upper, lower) {
-    const sql = `SELECT * FROM Plans WHERE length / 12 BETWEEN @upper * 12 AND @lower * 12`
+    const sql = `SELECT * FROM plans WHERE length / 12 BETWEEN @upper * 12 AND @lower * 12`
     const stmt = db.prepare(sql);
     const result = stmt.get({
         "upper":upper,
@@ -16,7 +16,7 @@ function searchByLength(upper, lower) {
 }
 
 function searchBySidewallLength(upper,lower) {
-    const sql = `SELECT * FROM Plans WHERE length / 12 BETWEEN @upper * 12 AND @lower * 12`
+    const sql = `SELECT * FROM plans WHERE length / 12 BETWEEN @upper * 12 AND @lower * 12`
     const stmt = db.prepare(sql);
     const result = stmt.get({
         "upper":upper,
@@ -26,7 +26,7 @@ function searchBySidewallLength(upper,lower) {
 }
 
 function searchByWidth(upper, lower) {
-    const sql = `SELECT * FROM Plans WHERE width / 12 BETWEEN @upper * 12 AND @lower * 12`
+    const sql = `SELECT * FROM plans WHERE width / 12 BETWEEN @upper * 12 AND @lower * 12`
     const stmt = db.prepare(sql);
     const result = stmt.get({
        "upper":upper,
@@ -37,7 +37,7 @@ function searchByWidth(upper, lower) {
 }
 
 function searchByBeds(beds) {
-    const sql = `SELECT * FROM Plans WHERE beds=@beds`
+    const sql = `SELECT * FROM plans WHERE beds=@beds`
     const stmt = db.prepare(sql);
     const result = stmt.get({
         "beds":beds
@@ -47,7 +47,7 @@ function searchByBeds(beds) {
 }
 
 function searchBySQFT(upper, lower) {
-    const sql = `SELECT * FROM Plans WHERE heatedCooledSQF BETWEEN @upper * 12 AND @lower * 12`
+    const sql = `SELECT * FROM plans WHERE heatedCooledSQF BETWEEN @upper * 12 AND @lower * 12`
     const stmt = db.prepare(sql);
     const result = stmt.get({
         "upper":upper,
@@ -58,7 +58,7 @@ function searchBySQFT(upper, lower) {
 }
 
 function searchByFloors(floors) {
-    const sql = `SELECT * FROM Plans WHERE floors=@floors`;
+    const sql = `SELECT * FROM plans WHERE floors=@floors`;
     const stmt = db.prepare(sql);
     const result = stmt.get({
         "floors":floors
@@ -68,7 +68,7 @@ function searchByFloors(floors) {
 }
 
 function searchByBaths(baths) {
-    const sql = `SELECT * FROM Plans WHERE baths=@baths`
+    const sql = `SELECT * FROM plans WHERE baths=@baths`
     const stmt = db.prepare(sql);
     const result = stmt.get({
         "baths":baths
@@ -78,7 +78,7 @@ function searchByBaths(baths) {
 
 
  function addToDatabase() {
-    const sql = `INSERT INTO PLANS (
+    const sql = `INSERT INTO plans (
         planID, overallSQFT, heatedCooledSQF, length, width, sidewallLength, stories, bedrooms, bathrooms, halfBaths, saferoom) VALUES (?,?,?,?,?,?,?,?,?,?,?)`
     const stmt = db.prepare(sql); 
     const result = stmt.get({

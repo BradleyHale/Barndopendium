@@ -8,13 +8,14 @@ value strings are static.
 need to change it bc search operation is not apart of the request body
 */
 async function searchByOp(req,res) {
-    const {upperSQFT,lowerSQFT,upperLength,upperWidth,lowerSidewallLength,upperSidewallLength,Beds,Floors,Baths, operation} = req.query; // all parameters go into this one line
+    const operation = req.params.searchOperation;
+    const {upperSQFT,lowerSQFT,upperLength,upperWidth,lowerWidth,lowerSidewallLength,upperSidewallLength,Beds,Floors,Baths} = req.query; // all parameters go into this one line
     let result;
 
-    if (operation === "searchBySQFT") {
+    if (req.query.operation === "searchBySQFT") {
         result = await planModel.searchBySQFT(upperSQFT,lowerSQFT);
     } else if (operation === "searchByWidth") {
-        result = await planModel.searchByWidth(upper,lower);
+        result = await planModel.searchByWidth(upperWidth,lowerWidth);
     } else if (operation === "searchByLength") {
         result = await planModel.searchByLength(upperLength,upperWidth);
     } else if (operation === "searchBySidewallLength") {
@@ -26,8 +27,9 @@ async function searchByOp(req,res) {
     } else if (operation === "searchByBaths") {
         result = await planModel.searchByBaths(Baths);
     } else {
-        res.send({operation});
+        console.log("your code doesn't work... YET!!\n");
         return res.sendStatus(404);
+        
     }
 
     if(!result) {
