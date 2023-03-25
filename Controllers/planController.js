@@ -12,7 +12,7 @@ async function searchByOp(req,res) {
     const {upperSQFT,lowerSQFT,upperLength,upperWidth,lowerWidth,lowerSidewallLength,upperSidewallLength,Beds,Floors,Baths} = req.query; // all parameters go into this one line
     let result;
 
-    if (req.query.operation === "searchBySQFT") {
+    if (operation === "searchBySQFT") {
         result = await planModel.searchBySQFT(upperSQFT,lowerSQFT);
     } else if (operation === "searchByWidth") {
         result = await planModel.searchByWidth(upperWidth,lowerWidth);

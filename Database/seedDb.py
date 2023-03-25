@@ -6,7 +6,7 @@ cursor = connection.cursor()
 #
 # dimensions = []
 cursor.execute("CREATE TABLE IF NOT EXISTS plans(planID,overallSQF,heatedCooledSQF,length,width,sidewallLength,stories,bedrooms,bathrooms,halfBaths,saferoom)")
-# TO DO LIST:
+# TO DO LIST: store inches and feet as different columns
 with open('../Copy of Barndominium Catalog.csv', newline='') as csvfile:
     spamreader = csv.reader(csvfile)
     for row in spamreader:
