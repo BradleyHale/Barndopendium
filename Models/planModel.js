@@ -37,7 +37,7 @@ function searchByWidth(upper, lower) {
 }
 
 function searchByBeds(beds) {
-    const sql = `SELECT * FROM plans WHERE beds=@beds`
+    const sql = `SELECT * FROM plans WHERE bedrooms=@beds`
     const stmt = db.prepare(sql);
     const result = stmt.get({
         "beds":beds

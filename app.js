@@ -1,5 +1,5 @@
 "use strict";
-require("dotenv").config;
+require("dotenv").config();
 const path = require('path');
 // const { app, BrowserWindow } = require('electron'); | will implement at the end
 // TODO LIST: parse req.query
@@ -37,3 +37,6 @@ const planController = require("./Controllers/planController");
 // );
 
 app.listen(8080)
+module.exports = {
+   app
+};
