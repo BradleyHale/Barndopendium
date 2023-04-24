@@ -6,7 +6,7 @@ const path = require('path');
 const express = require("express");
 const app = express();
 
-app.use(express.static("public", {index: "index.html", extensions: ["html"]}));
+// app.use(express.static("public", {index: "index.html", extensions: ["html"]}));
 
 // require validators
 const planValidator = require("./Validators/planValidator");
@@ -19,16 +19,13 @@ const planController = require("./Controllers/planController");
 
 // index GET:
  app.get("/", (req, res) => {
-    res.render("index");
+    
     res.send("this is a test");
     console.log("this is a test");
 });
 
  // GET - retrieve data from database
- app.get("/api/search/:searchOperation", (req,res) => {
-    planController.searchByOp(req,res);
-
- })
+ app.get("/api/search", planController.searchByOp);
 
  // POST - insert new plans into database
 // app.post("/api/insert",
@@ -36,7 +33,10 @@ const planController = require("./Controllers/planController");
 //    planController.addPlan
 // );
 
-app.listen(8080)
+const {PORT} = process.env;
+app.listen(PORT, () => {
+   console.log(`Listening on http://localhost:${PORT}`)
+})
 module.exports = {
    app
 };

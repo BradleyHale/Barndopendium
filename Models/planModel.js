@@ -1,11 +1,16 @@
 "use strict";
 const db = require("./db");
-/*
-    functions with single inputs may have to go to double, depends on if refresh is needed
-*/
+
+function testFunction() {
+    const sql = `SELECT * FROM PLANS`;
+    const stmt = db.prepare(sql);
+    const result = stmt.get();
+    return result;
+}
+// TODO LIST: add views for each metric param (length,width,sidewalllength / 12, length width sidewalllength % 12) to all every search function
 
 function searchByLength(upper, lower) {
-    const sql = `SELECT * FROM plans WHERE length / 12 BETWEEN @upper * 12 AND @lower * 12`
+    const sql = `SELECT *, length / 12 AS lengthFt, length % 12 AS lengthIn, width / 12 AS widthFt, width % 12 AS widthIn, sidewallLength / 12 AS sidewallLengthFt, sidewallLength % 12 AS sidewallLengthIn FROM plans WHERE length / 12 BETWEEN @upper * 12 AND @lower * 12`;
     const stmt = db.prepare(sql);
     const result = stmt.get({
         "upper":upper,
@@ -16,7 +21,10 @@ function searchByLength(upper, lower) {
 }
 
 function searchBySidewallLength(upper,lower) {
-    const sql = `SELECT * FROM plans WHERE length / 12 BETWEEN @upper * 12 AND @lower * 12`
+    const sql = `SELECT *, length / 12 AS lengthFt, length % 12 AS lengthIn,
+     width / 12 AS widthFt, width % 12 AS widthIn,
+      sidewallLength / 12 AS sidewallLengthFt, sidewallLength % 12 AS sidewallLengthIn
+       FROM plans WHERE length / 12 BETWEEN @upper * 12 AND @lower * 12`;
     const stmt = db.prepare(sql);
     const result = stmt.get({
         "upper":upper,
@@ -26,7 +34,10 @@ function searchBySidewallLength(upper,lower) {
 }
 
 function searchByWidth(upper, lower) {
-    const sql = `SELECT * FROM plans WHERE width / 12 BETWEEN @upper * 12 AND @lower * 12`
+    const sql = `SELECT *, length / 12 AS lengthFt,
+     length % 12 AS lengthIn, width / 12 AS widthFt, width % 12 AS widthIn,
+      sidewallLength / 12 AS sidewallLengthFt, sidewallLength % 12 AS sidewallLengthIn
+       FROM plans WHERE width / 12 BETWEEN @upper * 12 AND @lower * 12`;
     const stmt = db.prepare(sql);
     const result = stmt.get({
        "upper":upper,
@@ -37,17 +48,24 @@ function searchByWidth(upper, lower) {
 }
 
 function searchByBeds(beds) {
-    const sql = `SELECT * FROM plans WHERE bedrooms=@beds`
+    const sql = `SELECT *, length / 12 AS lengthFt, length % 12 AS lengthIn, 
+    width / 12 AS widthFt, width % 12 AS widthIn, 
+    sidewallLength / 12 AS sidewallLengthFt, sidewallLength % 12 
+    AS sidewallLengthIn FROM plans WHERE bedrooms=@beds`;
     const stmt = db.prepare(sql);
-    const result = stmt.get({
+    const result = stmt.all({
         "beds":beds
     });
+    console.log("beds:", beds);
     return result;
 
 }
 
 function searchBySQFT(upper, lower) {
-    const sql = `SELECT * FROM plans WHERE heatedCooledSQF BETWEEN @upper * 12 AND @lower * 12`
+    const sql = `SELECT *, length / 12 AS lengthFt, length % 12 AS lengthIn,
+     width / 12 AS widthFt, width % 12 AS widthIn,
+      sidewallLength / 12 AS sidewallLengthFt, sidewallLength % 12
+       AS sidewallLengthIn FROM plans WHERE heatedCooledSQF BETWEEN @upper * 12 AND @lower * 12`;
     const stmt = db.prepare(sql);
     const result = stmt.get({
         "upper":upper,
@@ -58,7 +76,10 @@ function searchBySQFT(upper, lower) {
 }
 
 function searchByFloors(floors) {
-    const sql = `SELECT * FROM plans WHERE floors=@floors`;
+    const sql = `SELECT *, length / 12 AS lengthFt,
+     length % 12 AS lengthIn, width / 12 AS widthFt, width % 12 AS widthIn,
+      sidewallLength / 12 AS sidewallLengthFt, sidewallLength % 12 AS sidewallLengthIn
+       FROM plans WHERE floors=@floors`;
     const stmt = db.prepare(sql);
     const result = stmt.get({
         "floors":floors
@@ -68,7 +89,10 @@ function searchByFloors(floors) {
 }
 
 function searchByBaths(baths) {
-    const sql = `SELECT * FROM plans WHERE baths=@baths`
+    const sql = `SELECT *, length / 12 AS lengthFt, length % 12 AS lengthIn,
+     width / 12 AS widthFt, width % 12 AS widthIn,
+      sidewallLength / 12 AS sidewallLengthFt, sidewallLength % 12 AS sidewallLengthIn
+       FROM plans WHERE baths=@baths`;
     const stmt = db.prepare(sql);
     const result = stmt.get({
         "baths":baths
@@ -79,7 +103,7 @@ function searchByBaths(baths) {
 
  function addToDatabase() {
     const sql = `INSERT INTO plans (
-        planID, overallSQFT, heatedCooledSQF, length, width, sidewallLength, stories, bedrooms, bathrooms, halfBaths, saferoom) VALUES (?,?,?,?,?,?,?,?,?,?,?)`
+        planID, overallSQFT, heatedCooledSQF, length, width, sidewallLength, stories, bedrooms, bathrooms, halfBaths, saferoom) VALUES (?,?,?,?,?,?,?,?,?,?,?)`;
     const stmt = db.prepare(sql); 
     const result = stmt.get({
         // placeholder
@@ -94,5 +118,6 @@ module.exports = {
     searchBySQFT,
     searchByFloors,
     searchByBaths,
-    addToDatabase
+    addToDatabase,
+    testFunction
 }
