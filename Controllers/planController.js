@@ -8,12 +8,12 @@ const planModel = require("../Models/planModel");
     const operation = req.query.searchOperation;
     SQFTUpper = parseInt(SQFTUpper);
     SQFTLower = parseInt(SQFTLower);
-    widthUpper = parseInt(widthUpper);
-    widthLower = parseInt(widthLower);
-    lengthUpper = parseInt(lengthUpper);
-    lengthLower = parseInt(lengthLower);
-    sidewallLengthUpper = parseInt(sidewallLengthUpper);
-    sidewallLengthLower = parseInt(sidewallLengthLower);
+    widthUpper = parseInt(widthUpper) * 12;
+    widthLower = parseInt(widthLower) * 12;
+    lengthUpper = parseInt(lengthUpper) * 12;
+    lengthLower = parseInt(lengthLower) * 12;
+    sidewallLengthUpper = parseInt(sidewallLengthUpper) * 12;
+    sidewallLengthLower = parseInt(sidewallLengthLower) * 12;
     beds = parseInt(beds);
     baths = parseInt(baths);
     floors = parseInt(floors);
@@ -43,7 +43,7 @@ const planModel = require("../Models/planModel");
     console.log(result);
 
     if(!result) {
-        return res.sendStatus(404);
+        return res.sendStatus(400);
     }
     res.json(result);
 }
