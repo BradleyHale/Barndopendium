@@ -12,8 +12,8 @@ function testFunction() {
 function searchByLength(upper, lower) {
     const sql = `SELECT *, length / 12 AS lengthFt, length % 12 AS lengthIn,
      width / 12 AS widthFt, width % 12 AS widthIn,
-     sidewallLength / 12 AS sidewallLengthFt, sidewallLength % 12 AS sidewallLengthIn
-     FROM plans WHERE length BETWEEN @upper AND @lower`;
+      sidewallLength / 12 AS sidewallLengthFt, sidewallLength % 12 AS sidewallLengthIn
+       FROM plans WHERE length BETWEEN @upper AND @lower`;
     const stmt = db.prepare(sql);
     const result = stmt.all({
         "upper":upper,
@@ -27,7 +27,7 @@ function searchBySidewallLength(upper,lower) {
     const sql = `SELECT *, length / 12 AS lengthFt, length % 12 AS lengthIn,
      width / 12 AS widthFt, width % 12 AS widthIn,
       sidewallLength / 12 AS sidewallLengthFt, sidewallLength % 12 AS sidewallLengthIn
-       FROM plans WHERE length BETWEEN @upper * 12 AND @lower * 12`;
+       FROM plans WHERE length BETWEEN @upper AND @lower`;
     const stmt = db.prepare(sql);
     const result = stmt.all({
         "upper":upper,
@@ -40,7 +40,7 @@ function searchByWidth(upper, lower) {
     const sql = `SELECT *, length / 12 AS lengthFt,
      length % 12 AS lengthIn, width / 12 AS widthFt, width % 12 AS widthIn,
       sidewallLength / 12 AS sidewallLengthFt, sidewallLength % 12 AS sidewallLengthIn
-       FROM plans WHERE width / 12 BETWEEN @upper * 12 AND @lower * 12`;
+       FROM plans WHERE width BETWEEN @upper AND @lower`;
     const stmt = db.prepare(sql);
     const result = stmt.all({
        "upper":upper,

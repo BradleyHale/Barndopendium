@@ -22,19 +22,19 @@ const planModel = require("../Models/planModel");
     let result;
 
     if (operation === "searchBySQFT") {
-        result = await planModel.searchBySQFT(SQFTUpper,SQFTLower);
+        result = planModel.searchBySQFT(SQFTUpper,SQFTLower);
     } else if (operation === "searchByWidth") {
-        result = await planModel.searchByWidth(widthUpper,widthLower);
+        result = planModel.searchByWidth(widthUpper,widthLower);
     } else if (operation === "searchByLength") {
-        result = await planModel.searchByLength(lengthUpper,lengthLower);
+        result = planModel.searchByLength(lengthUpper,lengthLower);
     } else if (operation === "searchBySidewallLength") {
-        result = await planModel.searchBySidewallLength(sidewallLengthUpper,sidewallLengthLower);
+        result = planModel.searchBySidewallLength(sidewallLengthUpper,sidewallLengthLower);
     } else if (operation === "searchByBeds") {
-        result = await planModel.searchByBeds(beds);
+        result = planModel.searchByBeds(beds);
     } else if (operation === "searchByFloors") {
-        result = await planModel.searchByFloors(floors);
+        result = planModel.searchByFloors(floors);
     } else if (operation === "searchByBaths") {
-        result = await planModel.searchByBaths(baths);
+        result = planModel.searchByBaths(baths);
     } else {
         console.log("your code doesn't work... YET!!\n");
         return res.sendStatus(404);
