@@ -5,6 +5,10 @@ const path = require('path');
 // TODO LIST: parse req.query
 const express = require("express");
 const app = express();
+app.use(express.static("public", {
+   index: "index.html",
+   extensions: ['html']
+}));
 
 // app.use(express.static("public", {index: "index.html", extensions: ["html"]}));
 
@@ -17,10 +21,8 @@ const planController = require("./Controllers/planController");
 // endpoints ------------------------------------
 
 
-// index GET:
+// // index GET: test to see if the server is working on localhost
  app.get("/", (req, res) => {
-    
-    res.send("this is a test");
     console.log("this is a test");
 });
 

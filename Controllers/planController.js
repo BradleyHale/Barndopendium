@@ -1,7 +1,7 @@
 "use strict"
 const planModel = require("../Models/planModel");
 /*
-    3/31/2023: 
+    if it doesn't send a response, restart your pc
 */
  async function searchByOp(req,res) {
     let {SQFTUpper,SQFTLower,widthUpper,widthLower,lengthUpper,lengthLower,sidewallLengthUpper,sidewallLengthLower,beds,baths,floors,searchOperation} = req.query;
