@@ -1,27 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
   <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>This shows up in the browser tab</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>search Page</title>
   </head>
-    <body>
-      <div class="searchMenu">
-        <button onclick="plaeholder()" class="dropbtn">Search By...</button>
-        <div id="dropdownOptions" class="dropdown-content">
-          <a href="#">OverallSQF</a>
-          <a href="#">heatedCooledSQF</a>
-          <a href="#">Length</a>
-          <a href="#">Width</a>
-          <a href="#">SidewallLength</a>
-          <a href="#">Stories</a>
-          <a href="#">Bedrooms</a>
-          <a href="#">Bathrooms</a>
-          <a href="#">halfBaths</a>
-          <a href="#">saferoom?</a>
-        </div>
-      </div>
-    </body>
-</head>
+  <body>
+    <label for="searchCriteria"> choose a search option:</label>
+    <select name="searchCriteria" id="searchCriteria">
+      <option value="searchBySQFT">HeatedC&ooledSQFT</option>
+      <option value="searchByWidth">width</option>
+      <option value="SearchBySidewallLength">sidewallLength</option>
+      <option value="SearchByBeds">beds</option>
+      <option value="SearchByFloors">floors</option>
+      <option value="SearchByBaths">baths</option>
+    </select>
+  </body>
 </html>
