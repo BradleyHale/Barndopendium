@@ -9,11 +9,19 @@
     <label for="searchCriteria"> choose a search option:</label>
     <select name="searchCriteria" id="searchCriteria">
       <option value="searchBySQFT">HeatedC&ooledSQFT</option>
+      <option value="searchByLength">Length</option>
       <option value="searchByWidth">width</option>
       <option value="SearchBySidewallLength">sidewallLength</option>
       <option value="SearchByBeds">beds</option>
       <option value="SearchByFloors">floors</option>
       <option value="SearchByBaths">baths</option>
     </select>
+    <form action="/api/search" method ="get">
+      <label for="min">Minimum:</label><br>
+      <input type="number" id="min" name="min"><br>
+      <label for="max">Maximum:</label><br>
+      <input type="number" id="max" name="max">
+      <input type="submit" value="Submit">
+    </form>
   </body>
 </html>
