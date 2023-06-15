@@ -6,17 +6,73 @@ const planModel = require("../Models/planModel");
  async function searchByOp(req,res) {
     let {SQFTUpper,SQFTLower,widthUpper,widthLower,lengthUpper,lengthLower,sidewallLengthUpper,sidewallLengthLower,beds,baths,floors,searchOperation} = req.query;
     const operation = req.query.searchOperation;
-    SQFTUpper = parseInt(SQFTUpper);
-    SQFTLower = parseInt(SQFTLower);
-    widthUpper = parseInt(widthUpper) * 12;
-    widthLower = parseInt(widthLower) * 12;
-    lengthUpper = parseInt(lengthUpper) * 12;
+    // if field is undefined, initialize as default (1 or 0) else, parse input as an integer
+    if (!req.query.SQFTUpper) {
+        SQFTUpper = 1;
+    }
+    else {
+        SQFTUpper = parseInt(SQFTUpper);
+    }
+    if (!req.query.SQFTLower) {
+        SQFTLower = 0;
+    }
+    else {
+        SQFTLower = parseInt(SQFTLower);
+    }
+    if (!req.query.widthUpper) {
+        widthUpper = 1;
+    }
+    else {
+        widthUpper = parseInt(widthUpper) * 12;
+    }
+    if(!req.query.widthLower) {
+        widthLower = 0;
+    }
+    else {
+        widthLower = parseInt(widthLower) * 12;
+    }
+    if (!req.query.lengthUpper) {
+        lengthUpper = 1;
+    }
+    else {
+        lengthUpper = parseInt(lengthUpper) * 12;
+    }
+   if (!req.query.lengthLower) {
+    lengthLower = 0;
+   }
+   else {
     lengthLower = parseInt(lengthLower) * 12;
-    sidewallLengthUpper = parseInt(sidewallLengthUpper) * 12;
-    sidewallLengthLower = parseInt(sidewallLengthLower) * 12;
-    beds = parseInt(beds);
-    baths = parseInt(baths);
-    floors = parseInt(floors);
+   }
+    if(!req.query.sidewallLengthUpper) {
+        sidewallLengthUpper = 1;
+    }
+    else {
+        sidewallLengthUpper = parseInt(sidewallLengthUpper) * 12;
+    }
+    if(!req.query.sidewallLengthLower) {
+        sidewallLengthLower = 0;
+    }
+    else {
+        sidewallLengthLower = parseInt(sidewallLengthLower) * 12;
+    }
+    if (!req.query.beds) {
+        beds = 0;
+    }
+    else {
+        beds = parseInt(beds);
+    }
+    if(!req.query.baths) {
+        baths = 0;
+    }
+    else {
+        baths = parseInt(baths);
+    }
+    if (!req.query.floors) {
+        floors = 0;
+    }
+    else {
+        floors = parseInt(floors);
+    }
     console.log(operation);
     console.log(req.query);
     let result;
@@ -36,86 +92,18 @@ const planModel = require("../Models/planModel");
     } else if (operation === "searchByBaths") {
         result = planModel.searchByBaths(baths);
     } else {
-        console.log("your code doesn't work... YET!!\n");
+        console.log(result);
         return res.sendStatus(404);
         
     }
     console.log(result);
 
     if(!result) {
-        return res.sendStatus(400);
+        return res.sendStatus(404);
     }
     res.json(result);
 }
 
-// function databaseTest(req,res) {
-//     const operation = req.params.searchOperation;
-//     let result;
-//     if (operation === "searchBySQFT") {
-//         result = planModel.testFunction();
-//     } else if (operation === "searchByWidth") {
-//         result = planModel.testFunction();
-//     } else if (operation === "searchByLength") {
-//         result = planModel.testFunction();
-//     } else if (operation === "searchBySidewallLength") {
-//         result = planModel.testFunction();
-//     } else if (operation === "searchByBeds") {
-//         result = planModel.testFunction();
-//     } else if (operation === "searchByFloors") {
-//         result = planModel.testFunction();
-//     } else if (operation === "searchByBaths") {
-//         result = planModel.testFunction();
-//     } else {
-//         console.log("your code doesn't work... YET!!\n");
-//         return res.sendStatus(404);
-        
-//     }
-//     console.log(result);
-
-//     if(!result) {
-//         return res.send(result);
-//     }
-//     res.send(result);
-
-
-// }
-
-// async function getByLength(req,res) {
-//     const {upper,lower} = req.body;
-//     const input = await planModel.searchByLength(upper,lower);
-//     if(!input) {
-//         return res.sendStatus(404);
-//     }
-//     res.sendStatus(201);
-
-// }
-
-// async function getByBeds(req,res) {
-//     const beds = req.body;
-//     const input = await planModel.searchByBeds(beds);
-//     if(!input) {
-//         return res.sendStatus(404);
-//     }
-//     res.sendStatus(201);
-// }
-
-// async function getByFloors(req,res) {
-//     const {floors} = req.body;
-//     const input = await planModel.searchByFloors(floors);
-//     if(!input) {
-//         return res.sendStatus(404);
-//     }
-//     res.sendStatus(201);
-// }
-
-// async function getByBaths(req,res) {
-//     const {baths} = req.body;
-//     const input = await planModel.searchByBaths(baths);
-//     if(!input) {
-//         return res.sendStatus(404);
-//     }
-//     res.sendStatus(201);
-// }
 
 // async function addPlan(req,res) {
 //     const {plan} = req.body;
