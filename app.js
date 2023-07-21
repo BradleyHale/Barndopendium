@@ -1,8 +1,6 @@
+// NOTE: THIS VERSION D O E S  N O T COMPATIBLE WITH ELECTRON
 "use strict";
 require("dotenv").config();
-const path = require('path');
-// const { app, BrowserWindow } = require('electron'); | will implement at the end
-// TODO LIST: parse req.query
 const express = require("express");
 const app = express();
 app.use(express.static("public", {
@@ -10,13 +8,17 @@ app.use(express.static("public", {
    extensions: ['html']
 }));
 
-// app.use(express.static("public", {index: "index.html", extensions: ["html"]}));
+app.set('view engine', 'ejs');
+
+app.use(express.static("public", {index: "index.html", extensions: ["html"]}));
 
 // require validators
 const planValidator = require("./Validators/planValidator");
 
 // require controller
 const planController = require("./Controllers/planController");
+
+app.set("view engine", "ejs");
 
 // endpoints ------------------------------------
 
@@ -30,7 +32,7 @@ const planController = require("./Controllers/planController");
  app.get("/api/search", planController.searchByOp);
 
  // POST - insert new plans into database
-// app.post("/api/insert",
+// server.post("/api/insert",
 //    planValidator.validateRegisterBody,
 //    planController.addPlan
 // );

@@ -74,7 +74,8 @@ const planModel = require("../Models/planModel");
         floors = parseInt(floors);
     }
     console.log(operation);
-    console.log(req.query);
+    console.log(req.query
+        );
     let result;
 
     if (operation === "searchBySQFT") {
@@ -103,6 +104,7 @@ const planModel = require("../Models/planModel");
     }
     res.json(result);
 }
+
 
 
 // async function addPlan(req,res) {

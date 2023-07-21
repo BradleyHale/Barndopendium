@@ -7,7 +7,7 @@ function testFunction() {
     const result = stmt.all();
     return result;
 }
-// TODO LIST: add views for each metric param (length,width,sidewalllength / 12, length width sidewalllength % 12) to all every search function
+
 
 function searchByLength(upper, lower) {
     const sql = `SELECT *, length / 12 AS lengthFt, length % 12 AS lengthIn,
