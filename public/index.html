@@ -9,35 +9,35 @@
     <form action="/api/search" method ="get" id="searchOP">
       <label for="SQFT">SQFT</label>
       <input type="radio" id="SQFT" name="searchOperation" value="searchBySQFT">
-      <input type="number" id="SQFTLower" name="SQFTLower" placeholder="minimum" min="0">
-      <input type="number" id="SQFTUpper" name="SQFTUpper" placeholder="maximum" max="1"><br><br>
+      <input type="number" id="SQFTLower" name="SQFTLower" placeholder="minimum">
+      <input type="number" id="SQFTUpper" name="SQFTUpper" placeholder="maximum" ><br><br>
 
       <label for="Width">Width</label>
       <input type="radio" id="Width" name="searchOperation" value="searchByWidth">
-      <input type="number" id="widthLower" name="widthLower" placeholder="minimum" min="0">
-      <input type="number" id="widthUpper" name="widthUpper" placeholder="maximum" max="1"><br><br>
+      <input type="number" id="widthLower" name="widthLower" placeholder="minimum">
+      <input type="number" id="widthUpper" name="widthUpper" placeholder="maximum"><br><br>
 
       <label for="Length">Length</label>
       <input type="radio" id="Length" name="searchOperation" value="searchByLength">
-      <input type="number" id="lengthLower" name="lengthLower" placeholder="minimum" min="0">
-      <input type="number" id="lengthUpper" name="lengthUpper" placeholder="maximum" max="1"><br><br>
+      <input type="number" id="lengthLower" name="lengthLower" placeholder="minimum">
+      <input type="number" id="lengthUpper" name="lengthUpper" placeholder="maximum"><br><br>
 
       <label for="sidewallLength">sidewallLength</label>
       <input type="radio" id="sidewallLength" name="searchOperation" value="searchBySidewallLength">
-      <input type="number" id="sidewallLengthLower" name="sidewallLengthLower" placeholder="minimum" min="0">
-      <input type="number" id="sidewallLengthUpper" name="sidewallLengthUpper" placeholder="maximum" max="1"><br><br>
+      <input type="number" id="sidewallLengthLower" name="sidewallLengthLower" placeholder="minimum">
+      <input type="number" id="sidewallLengthUpper" name="sidewallLengthUpper" placeholder="maximum"><br><br>
 
       <label for="Beds">Beds</label>
-      <input type="radio" id="beds" name="searchOperation" value="searchByBeds"min="1">
-      <input type="number" id="beds" name="beds" placeholder="beds" min="1"><br><br>
+      <input type="radio" id="beds" name="searchOperation" value="searchByBeds">
+      <input type="number" id="beds" name="beds" placeholder="beds"><br><br>
 
       <label for="Baths">Baths</label>
-      <input type="radio" id="baths" name="searchOperation" value="searchByBaths" min="1">
-      <input type="number" id="baths" name="baths" placeholder="baths" min="1"><br><br>
+      <input type="radio" id="baths" name="searchOperation" value="searchByBaths" >
+      <input type="number" id="baths" name="baths" placeholder="baths"><br><br>
 
       <label for="Floors">Floors</label>
-      <input type="radio" id="floors" name="searchOperation" value="searchByFloors"min="1">
-      <input type="number" id="floors" name="floors" placeholder="Floors" min="1"><br><br>
+      <input type="radio" id="floors" name="searchOperation" value="searchByFloors">
+      <input type="number" id="floors" name="floors" placeholder="Floors"><br><br>
       <input type="submit" />
     </form>
   </body>

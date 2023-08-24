@@ -1,9 +1,7 @@
-// NOTE: THIS VERSION D O E S  N O T COMPATIBLE WITH ELECTRON
+
 "use strict";
 require("dotenv").config();
 const path = require('path');
-// const { app, BrowserWindow } = require('electron'); | will implement at the end
-// TODO LIST: parse req.query
 const express = require("express");
 const server = express();
 server.use(express.static("public", {
