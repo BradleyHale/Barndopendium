@@ -77,15 +77,15 @@ const planModel = require("../Models/planModel");
     console.log(req.query
         );
     let result;
-
+// the new problem is in the Models file. the model functions for searching by length, width, and sidewallLength do not work correctly
     if (operation === "searchBySQFT") {
-        result = planModel.searchBySQFT(SQFTUpper,SQFTLower);
+        result = planModel.searchBySQFT(SQFTLower,SQFTUpper);
     } else if (operation === "searchByWidth") {
-        result = planModel.searchByWidth(widthUpper,widthLower);
+        result = planModel.searchByWidth(widthLower,widthUpper);
     } else if (operation === "searchByLength") {
-        result = planModel.searchByLength(lengthUpper,lengthLower);
+        result = planModel.searchByLength(lengthLower,lengthUpper);
     } else if (operation === "searchBySidewallLength") {
-        result = planModel.searchBySidewallLength(sidewallLengthUpper,sidewallLengthLower);
+        result = planModel.searchBySidewallLength(sidewallLengthLower,sidewallLengthUpper);
     } else if (operation === "searchByBeds") {
         result = planModel.searchByBeds(beds);
     } else if (operation === "searchByFloors") {

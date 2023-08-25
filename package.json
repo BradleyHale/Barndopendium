@@ -4,15 +4,12 @@
   "description": "my first project",
   "main": "app.js",
   "scripts": {
-    "test": "test",
-    "start": "electron .",
-    "rebuild": "electron-rebuild -f -w yourmodule"
+    "test": "test"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/ejs": "^3.1.2",
-    "electron": "^22.0.2",
     "nodemon": "^2.0.21"
   },
   "dependencies": {
@@ -24,9 +21,5 @@
     "joi": "^17.9.2",
     "node": "^20.3.1",
     "validator": "^13.9.0"
-  },
-  "devDependencies": {
-    "@electron/rebuild": "^3.2.13",
-    "electron-rebuild": "^3.2.9"
   }
 }
