@@ -73,36 +73,51 @@ const planModel = require("../Models/planModel");
     else {
         floors = parseInt(floors);
     }
+    // log searc operation and req.query to console for debugging
     console.log(operation);
     console.log(req.query
         );
-    let result;
-// the new problem is in the Models file. the model functions for searching by length, width, and sidewallLength do not work correctly
+    let results;
+    // find which search operation is being used. search through the database for plans that meet the params and search operation
     if (operation === "searchBySQFT") {
-        result = planModel.searchBySQFT(SQFTLower,SQFTUpper);
+        results = planModel.searchBySQFT(SQFTLower,SQFTUpper);
     } else if (operation === "searchByWidth") {
-        result = planModel.searchByWidth(widthLower,widthUpper);
+        results = planModel.searchByWidth(widthLower,widthUpper);
     } else if (operation === "searchByLength") {
-        result = planModel.searchByLength(lengthLower,lengthUpper);
+        results = planModel.searchByLength(lengthLower,lengthUpper);
     } else if (operation === "searchBySidewallLength") {
-        result = planModel.searchBySidewallLength(sidewallLengthLower,sidewallLengthUpper);
+        results = planModel.searchBySidewallLength(sidewallLengthLower,sidewallLengthUpper);
     } else if (operation === "searchByBeds") {
-        result = planModel.searchByBeds(beds);
+        results = planModel.searchByBeds(beds);
     } else if (operation === "searchByFloors") {
-        result = planModel.searchByFloors(floors);
+        results = planModel.searchByFloors(floors);
     } else if (operation === "searchByBaths") {
-        result = planModel.searchByBaths(baths);
+        results = planModel.searchByBaths(baths);
     } else {
-        console.log(result);
+        // if not a valid search results, return 404
+        console.log(results);
         return res.sendStatus(404);
         
     }
-    console.log(result);
-
-    if(!result) {
+    // output resultss of search to the console
+    console.log(results);
+    // if results is undefined, return 404. 
+    if(!results) {
         return res.sendStatus(404);
     }
-    res.json(result);
+    // render search resultss
+    res.render("results", {"results": results});
+    // send the search resultss as a JSON response
+    res.json(results);
+}
+
+function renderSingleResult(req,res) {
+    const plan = planModel.getPlanByID(req.params.planID);
+    if (!plan) {
+        // if plan isn't found, send status 404
+        res.status(404);
+    }
+    res.render("singePlanPage", {"plan": plan});
 }
 
 
@@ -116,15 +131,9 @@ const planModel = require("../Models/planModel");
 //     res.sendStatus(201);
 // }
 
-/*
-    look at the request body, key is request type, value is string of desired search request.
-    if it matches a certain string, call that search function and return the results.
-    value strings are static.
-    need to change it bc search operation is not apart of the request body
-*/
-
 module.exports = {
-    searchByOp
+    searchByOp,
+    renderSingleResult
     // databaseTest
 
 }

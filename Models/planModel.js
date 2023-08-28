@@ -103,6 +103,13 @@ function searchByBaths(baths) {
     return result;
 }
 
+function getPlanByID(planID) {
+    const sql = 'SELECT & FROM plans WHERE planID=@planID';
+    const stmt = db.prepare(sql);
+    const row = stmt.get({planID});
+    return row;
+}
+
 
  function addToDatabase() {
     const sql = `INSERT INTO plans (
@@ -122,5 +129,6 @@ module.exports = {
     searchByFloors,
     searchByBaths,
     addToDatabase,
+    getPlanByID,
     testFunction
 }
