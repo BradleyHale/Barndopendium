@@ -9,6 +9,13 @@ app.use(express.static("public", {
    extensions: ['html']
 }));
 
+/*
+   TODO LIST:
+      - find out why half baths is undefined
+      - figure out why the planID's from the search results are rendering
+         3 times per page
+*/
+
 // set view engine
 app.set('view engine', 'ejs');
 // require validators
@@ -28,6 +35,7 @@ const planController = require("./Controllers/planController");
 
  // GET - retrieve data from database
  app.get("/api/search", planController.searchByOp);
+ app.get("/results/:planID",planController.renderSingleResult);
 
  // POST - insert new plans into database
 // app.post("/api/insert",

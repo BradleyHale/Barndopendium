@@ -4,7 +4,7 @@ const planModel = require("../Models/planModel");
     if it doesn't send a response, restart your pc
 */
  async function searchByOp(req,res) {
-    let {SQFTUpper,SQFTLower,widthUpper,widthLower,lengthUpper,lengthLower,sidewallLengthUpper,sidewallLengthLower,beds,baths,floors,searchOperation} = req.query;
+    let {SQFTUpper,SQFTLower,widthUpper,widthLower,lengthUpper,lengthLower,sidewallLengthUpper,sidewallLengthLower,beds,baths,floors,halfBaths,searchOperation} = req.query; // need to implement half baths
     const operation = req.query.searchOperation;
     // if field is undefined, initialize as default (1 for max, 0 for min) else, parse input as an integer
     if (typeof req.query.SQFTUpper === 'undefined') {
@@ -73,6 +73,9 @@ const planModel = require("../Models/planModel");
     else {
         floors = parseInt(floors);
     }
+    if (typeof req.query.halfBaths === 'undefined') {
+        halfBaths = 0;
+    }
     // log searc operation and req.query to console for debugging
     console.log(operation);
     console.log(req.query
@@ -99,25 +102,25 @@ const planModel = require("../Models/planModel");
         return res.sendStatus(404);
         
     }
-    // output resultss of search to the console
+    // output results of search to the console
     console.log(results);
     // if results is undefined, return 404. 
     if(!results) {
         return res.sendStatus(404);
     }
-    // render search resultss
+    // render search results
     res.render("results", {"results": results});
-    // send the search resultss as a JSON response
-    res.json(results);
+    // send the search results as a JSON response
+    // res.json(results);
 }
 
 function renderSingleResult(req,res) {
     const plan = planModel.getPlanByID(req.params.planID);
     if (!plan) {
         // if plan isn't found, send status 404
-        res.status(404);
+        return res.sendStatus(404);
     }
-    res.render("singePlanPage", {"plan": plan});
+    res.render("singlePlanPage", {"plan": plan});
 }
 
 

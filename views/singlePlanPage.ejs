@@ -8,11 +8,24 @@
 </head>
 <body>
     <% if (!plan) { %>
-        <h1>plan not found</h1>
-        <% } else { %>
+        <h1>Plan not found</h1>
+    <% } else { %>
         <div class="row">
-            <p><%= "planID: " + plan.planID %></p>
+            <p><%= "Plan ID: " +  plan.planID %></p>
+            <p><%= "Overall Square Feet: " + plan.overallSQF %></p>
+            <p><%= "Heated and Cooled Square Feet: " + plan.heatedCooledSQF %></p>
         </div>
-        <% } %>
+        <div class="row">
+            <p><%= "Length: " + plan.length / 12 + " ft " + plan.length % 12 + " in" %></p>
+            <p><%= "Width: " + plan.width / 12 + " ft " + plan.width % 12 + " in" %></p>
+            <p><%= "Sidewall Length: " + plan.sidewallLength / 12 + " ft " + plan.sidewallLength % 12 + " in" %></p>
+        </div>
+        <div class="row">
+            <p> <%= "floors: " + plan.stories %></p>
+            <p> <%= "bedrooms: " + plan.bedrooms %></p>
+            <p> <%= "bathrooms: " + plan.bathrooms %></p>
+            <p> <%= "half baths: " + plan.halfBaths %></p>
+        </div>
+    <% } %>
 </body>
 </html>

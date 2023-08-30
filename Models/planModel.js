@@ -1,5 +1,6 @@
 "use strict";
 const db = require("./db");
+// NOTE: views aren't used anywhere, but are still in place in order to help debugging in code editor
 
 function testFunction() {
     const sql = `SELECT * FROM PLANS`;
@@ -104,7 +105,7 @@ function searchByBaths(baths) {
 }
 
 function getPlanByID(planID) {
-    const sql = 'SELECT & FROM plans WHERE planID=@planID';
+    const sql = 'SELECT * FROM plans WHERE planID=@planID';
     const stmt = db.prepare(sql);
     const row = stmt.get({planID});
     return row;
