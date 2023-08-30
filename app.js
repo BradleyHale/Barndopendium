@@ -12,8 +12,6 @@ app.use(express.static("public", {
 /*
    TODO LIST:
       - find out why half baths is undefined
-      - figure out why the planID's from the search results are rendering
-         3 times per page
 */
 
 // set view engine
