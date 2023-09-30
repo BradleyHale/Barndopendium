@@ -9,6 +9,8 @@ app.use(express.static("public", {
    extensions: ['html']
 }));
 
+// IMPORTANT: domain name = barndopendium.xyz
+
 /*
    TODO LIST:
       - find out why half baths is undefined
