@@ -112,14 +112,21 @@ function getPlanByID(planID) {
 }
 
 
- function addToDatabase() {
-    const sql = `INSERT INTO plans (
-        planID, overallSQFT, heatedCooledSQF, length, width, sidewallLength, stories, bedrooms, bathrooms, halfBaths, saferoom) VALUES (?,?,?,?,?,?,?,?,?,?,?)`;
-    const stmt = db.prepare(sql); 
-    const result = stmt.get({
-        // placeholder
-    });
-}
+//  function addToDatabase() {
+//     const sql = `INSERT INTO plans (
+//         planID, overallSQFT, heatedCooledSQF, length, width, sidewallLength, stories, bedrooms, bathrooms, halfBaths, saferoom) VALUES (?,?,?,?,?,?,?,?,?,?,?)`;
+//     const stmt = db.prepare(sql); 
+//     const result = stmt.get({
+//         // placeholder
+//     });
+// }
+
+/* 
+    function searchByFeature() {
+        use "LIKE" keyword to search for all feature strings
+        that contain the input
+    }
+*/
 
 module.exports = {
     searchByLength,
