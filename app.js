@@ -13,7 +13,9 @@ app.use(express.static("public", {
 
 /*
    TODO LIST:
-      - find out why half baths is undefined
+      - un-scuff this stuff and 
+      - implement multi-attribute search: put search results in an array,
+      and as long as search operation != nothing, keep searching through the array
 */
 
 // set view engine

@@ -4,13 +4,15 @@
   "description": "my first project",
   "main": "app.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "dev": "nodemon app.js",
+    "start":"app.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/ejs": "^3.1.2",
-    "nodemon": "^2.0.21"
+    "nodemon": "^3.0.2"
   },
   "dependencies": {
     "dotenv": "^16.3.1",

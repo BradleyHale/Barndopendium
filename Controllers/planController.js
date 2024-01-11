@@ -76,7 +76,7 @@ const planModel = require("../Models/planModel");
     if (typeof req.query.halfBaths === 'undefined') {
         halfBaths = 0;
     }
-    // log searc operation and req.query to console for debugging
+    // log search operation and req.query to console for debugging
     console.log(operation);
     console.log(req.query
         );

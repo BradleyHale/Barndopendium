@@ -136,7 +136,7 @@ module.exports = {
     searchBySQFT,
     searchByFloors,
     searchByBaths,
-    addToDatabase,
+    //addToDatabase,
     getPlanByID,
     testFunction
 }
