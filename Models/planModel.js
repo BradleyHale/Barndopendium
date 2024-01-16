@@ -9,7 +9,6 @@ function testFunction() {
     return result;
 }
 
-
 function searchByLength(upper, lower) {
     const sql = `SELECT *, length / 12 AS lengthFt, length % 12 AS lengthIn,
      width / 12 AS widthFt, width % 12 AS widthIn,
