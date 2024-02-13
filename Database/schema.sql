@@ -12,16 +12,3 @@ CREATE TABLE IF NOT EXISTS plans (
     saferoom BOOLEAN DEFAULT 0 
 );
 -- anything below this comment is currently not in use, will be implemented in future versions--------
-CREATE TABLE IF NOT EXISTS bonusFeatures(
-    FOREIGN KEY (planID) REFERENCES Plans(planID),
-    featureID INTEGER
-
-);
-
-CREATE TABLE IF NOT EXISTS hasShops (
-    FOREIGN KEY (planID) REFERENCES Plans(planID),
-    length INTEGER NOT NULL,
-    WIDTH INTEGER NOT NULL, 
-    attached BOOLEAN DEFAULT 0
-
-);

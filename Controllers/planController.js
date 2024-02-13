@@ -1,11 +1,15 @@
 "use strict"
 const planModel = require("../Models/planModel");
 /*
-    if it doesn't send a response, restart your pc
+    ~~if it doesn't send a response, restart your pc~~
+    you don't have to do this. most likely you have another process running on this port. kill whatever process is on this port and restart
 */
  async function searchByOp(req,res) {
     let {SQFTUpper,SQFTLower,widthUpper,widthLower,lengthUpper,lengthLower,sidewallLengthUpper,sidewallLengthLower,beds,baths,floors,halfBaths,searchOperations} = req.query; // need to implement half baths
-    const operations = req.query.searchOperations;
+    let operations = req.query.searchOperations;
+    if (typeof operations != "object") {
+        operations = [operations]
+    }
     // if field is undefined, initialize as default (1 for max, 0 for min) else, parse input as an integer
     if (typeof req.query.SQFTUpper === 'undefined') {
         SQFTUpper = 1;
@@ -78,8 +82,7 @@ const planModel = require("../Models/planModel");
     }
     // log search operation and req.query to console for debugging
     console.log(operations);
-    console.log(req.query
-        );
+    console.log(req.query);
     let results = [];
     // find which search operation is being used. search through the database for plans that meet the params and search operation
     for(let i = 0; i < operations.length; i++) {
@@ -128,16 +131,6 @@ function renderSingleResult(req,res) {
     res.render("singlePlanPage", {"plan": plan});
 }
 
-
-
-// async function addPlan(req,res) {
-//     const {plan} = req.body;
-//     const input = await planModel.addToDatabase(plan);
-//     if(!input) {
-//         return res.sendStatus(404);
-//     }
-//     res.sendStatus(201);
-// }
 
 module.exports = {
     searchByOp,
