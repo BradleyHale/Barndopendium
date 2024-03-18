@@ -23,6 +23,85 @@ function searchByLength(upper, lower) {
 
 }
 
+function generalSearch(params, searchOperations = []) {
+    let { SQFTLower, SQFTUpper, lengthUpper, lengthLower, widthUpper, widthLower, sidewallLengthUpper, sidewallLengthLower, floors, baths, beds } = params;
+    let conditions = [];
+    let args = {};
+    console.log(params);
+    
+    // Add conditions based on search operations
+    searchOperations.forEach(operation => {
+        switch (operation) {
+            case 'searchBySQFT':
+                if (SQFTLower !== undefined && SQFTUpper !== undefined) {
+                    conditions.push(`overallSQF <= @SQFTUpper`);
+                    conditions.push(`overallSQF >= @SQFTLower`);
+                    args['@SQFTLower'] = SQFTLower;
+                    args['@SQFTUpper'] = SQFTUpper;
+                }
+                break;
+            case 'searchByWidth':
+                if (widthLower !== undefined && widthUpper !== undefined) {
+                    conditions.push(`width <= @widthUpper`);
+                    conditions.push(`width >= @widthLower`);
+                    args['@widthLower'] = widthLower * 12; // Convert feet to inches
+                    args['@widthUpper'] = widthUpper * 12; // Convert feet to inches
+                }
+                break;
+            case 'searchByLength':
+                if (lengthLower !== undefined && lengthUpper !== undefined) {
+                    conditions.push(`length <= @lengthUpper`);
+                    conditions.push(`length >= @lengthLower`);
+                    args['@lengthLower'] = lengthLower * 12; // Convert feet to inches
+                    args['@lengthUpper'] = lengthUpper * 12; // Convert feet to inches
+                }
+                break;
+            case 'searchBySidewallLength':
+                if (sidewallLengthLower !== undefined && sidewallLengthUpper !== undefined) {
+                    conditions.push(`sidewallLength <= @sidewallLengthUpper`);
+                    conditions.push(`sidewallLength >= @sidewallLengthLower`);
+                    args['@sidewallLengthLower'] = sidewallLengthLower * 12; // Convert feet to inches
+                    args['@sidewallLengthUpper'] = sidewallLengthUpper * 12; // Convert feet to inches
+                }
+                break;
+            case 'searchByBeds':
+                if (beds !== undefined) {
+                    conditions.push(`bedrooms = @beds`);
+                    args['@beds'] = beds;
+                }
+                break;
+            case 'searchByFloors':
+                if (floors !== undefined) {
+                    conditions.push(`stories = @floors`);
+                    args['@floors'] = floors;
+                }
+                break;
+            case 'searchByBaths':
+                if (baths !== undefined) {
+                    conditions.push(`bathrooms = @baths`);
+                    args['@baths'] = baths;
+                }
+                break;
+        }
+    });
+
+    // Construct the WHERE clause
+    let whereClause = '';
+    if (conditions.length > 0) {
+        whereClause = 'WHERE ' + conditions.join(' AND ');
+    }
+
+    // Prepare and execute SQL query
+    const sqlQuery = `SELECT * FROM plans ${whereClause}`;
+    const stmt = db.prepare(sqlQuery);
+    const result = stmt.all(args);
+
+    return result;
+}
+
+
+
+
 function searchBySidewallLength(upper,lower) {
     const sql = `SELECT *, length / 12 AS lengthFt, length % 12 AS lengthIn,
      width / 12 AS widthFt, width % 12 AS widthIn,
@@ -137,5 +216,6 @@ module.exports = {
     searchByBaths,
     //addToDatabase,
     getPlanByID,
-    testFunction
+    testFunction,
+    generalSearch
 }
