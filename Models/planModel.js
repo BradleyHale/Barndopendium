@@ -27,8 +27,7 @@ function generalSearch(params, searchOperations = []) {
     let { SQFTLower, SQFTUpper, lengthUpper, lengthLower, widthUpper, widthLower, sidewallLengthUpper, sidewallLengthLower, floors, baths, beds } = params;
     let conditions = [];
     let args = {};
-    console.log(params);
-    
+    console.log("search parameters: ", params);
     // Add conditions based on search operations
     searchOperations.forEach(operation => {
         switch (operation) {
@@ -36,61 +35,63 @@ function generalSearch(params, searchOperations = []) {
                 if (SQFTLower !== undefined && SQFTUpper !== undefined) {
                     conditions.push(`overallSQF <= @SQFTUpper`);
                     conditions.push(`overallSQF >= @SQFTLower`);
-                    args['@SQFTLower'] = SQFTLower;
-                    args['@SQFTUpper'] = SQFTUpper;
+                    args['SQFTLower'] = SQFTLower;
+                    args['SQFTUpper'] = SQFTUpper;
                 }
                 break;
             case 'searchByWidth':
                 if (widthLower !== undefined && widthUpper !== undefined) {
                     conditions.push(`width <= @widthUpper`);
                     conditions.push(`width >= @widthLower`);
-                    args['@widthLower'] = widthLower * 12; // Convert feet to inches
-                    args['@widthUpper'] = widthUpper * 12; // Convert feet to inches
+                    args['widthLower'] = widthLower * 12; // Convert feet to inches
+                    args['widthUpper'] = widthUpper * 12; // Convert feet to inches
                 }
                 break;
             case 'searchByLength':
                 if (lengthLower !== undefined && lengthUpper !== undefined) {
                     conditions.push(`length <= @lengthUpper`);
                     conditions.push(`length >= @lengthLower`);
-                    args['@lengthLower'] = lengthLower * 12; // Convert feet to inches
-                    args['@lengthUpper'] = lengthUpper * 12; // Convert feet to inches
+                    args['lengthLower'] = lengthLower * 12; // Convert feet to inches
+                    args['lengthUpper'] = lengthUpper * 12; // Convert feet to inches
                 }
                 break;
             case 'searchBySidewallLength':
                 if (sidewallLengthLower !== undefined && sidewallLengthUpper !== undefined) {
                     conditions.push(`sidewallLength <= @sidewallLengthUpper`);
                     conditions.push(`sidewallLength >= @sidewallLengthLower`);
-                    args['@sidewallLengthLower'] = sidewallLengthLower * 12; // Convert feet to inches
-                    args['@sidewallLengthUpper'] = sidewallLengthUpper * 12; // Convert feet to inches
+                    args['sidewallLengthLower'] = sidewallLengthLower * 12; // Convert feet to inches
+                    args['sidewallLengthUpper'] = sidewallLengthUpper * 12; // Convert feet to inches
                 }
                 break;
             case 'searchByBeds':
                 if (beds !== undefined) {
                     conditions.push(`bedrooms = @beds`);
-                    args['@beds'] = beds;
+                    args['beds'] = beds;
                 }
                 break;
             case 'searchByFloors':
                 if (floors !== undefined) {
                     conditions.push(`stories = @floors`);
-                    args['@floors'] = floors;
+                    args['floors'] = floors;
                 }
                 break;
             case 'searchByBaths':
                 if (baths !== undefined) {
                     conditions.push(`bathrooms = @baths`);
-                    args['@baths'] = baths;
+                    args['baths'] = baths;
                 }
                 break;
         }
     });
 
     // Construct the WHERE clause
+    console.log("current conditions: ", conditions);
+    console.log("args: ---------------------------------------- ", args);
     let whereClause = '';
     if (conditions.length > 0) {
         whereClause = 'WHERE ' + conditions.join(' AND ');
     }
-
+    console.log("current Where Clause: ", whereClause);
     // Prepare and execute SQL query
     const sqlQuery = `SELECT * FROM plans ${whereClause}`;
     const stmt = db.prepare(sqlQuery);
